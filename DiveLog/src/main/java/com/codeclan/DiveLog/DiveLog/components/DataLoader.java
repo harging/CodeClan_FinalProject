@@ -35,6 +35,6 @@ public class DataLoader implements ApplicationRunner {
     public void readFromExcel() {
 
     }
-    
+
 //    look for string split function in java for splitting up the list of sample points
 }
