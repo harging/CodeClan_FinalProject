@@ -1,6 +1,7 @@
 package com.codeclan.DiveLog.DiveLog.models;
 
 import com.codeclan.DiveLog.DiveLog.interfaces.IValveType;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -12,6 +13,15 @@ public class Cylinder implements IValveType {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @ManyToOne()
+    @JoinColumn(name = "dive_id")
+    @JsonBackReference
+    private Dive dive;
+
+    @OneToOne
+    @JoinColumn(name = "regulator_id", referencedColumnName = "id")
+    private Regulator regulator;
 
     @Column(name = "name")
     private String name;
@@ -43,16 +53,15 @@ public class Cylinder implements IValveType {
     @Column(name = "o2mix")
     private int o2mix;
 
-    @Column(name = "regulator")
-    private Regulator regulator;
-
     @Column(name = "notes")
     private String notes;
 
-    public Cylinder(Long id, String name, Date dateOfLastTest, String testType,
+    public Cylinder(Long id, Dive dive, Regulator regulator, String name, Date dateOfLastTest, String testType,
                     ValveType valveType, int volume, int workingPressure, Boolean twinSet,
-                    int barStart, int barEnd, int o2mix, Regulator regulator, String notes) {
+                    int barStart, int barEnd, int o2mix, String notes) {
         this.id = id;
+        this.dive = dive;
+        this.regulator = regulator;
         this.name = name;
         this.dateOfLastTest = dateOfLastTest;
         this.testType = testType;
@@ -63,7 +72,6 @@ public class Cylinder implements IValveType {
         this.barStart = barStart;
         this.barEnd = barEnd;
         this.o2mix = o2mix;
-        this.regulator = regulator;
         this.notes = notes;
     }
 
@@ -77,6 +85,14 @@ public class Cylinder implements IValveType {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Dive getDive() {
+        return dive;
+    }
+
+    public void setDive(Dive dive) {
+        this.dive = dive;
     }
 
     public String getName() {

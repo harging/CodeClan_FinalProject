@@ -68,8 +68,10 @@ public class Dive {
     @Column(name = "boat")
     private String boat;
 
-    @Column(name = "cylinder")
-    private Cylinder cylinder;
+    @Column(name = "cylinders")
+    @OneToMany(mappedBy = "dive")
+    @JsonBackReference
+    private List<Cylinder> cylinders = new ArrayList<>();
 
     @Column(name = "weight")
     private float weight;
@@ -90,7 +92,7 @@ public class Dive {
                 String place, String diveSite, DecimalFormat latitude,
                 DecimalFormat longitude, String weather, int visibility,
                 int airTemp, int bottomTemp, int surfaceTemp, String buddy,
-                String boat, Cylinder cylinder, float weight, String notes, int sampleRate) {
+                String boat, ArrayList<Cylinder> cylinders, float weight, String notes, int sampleRate) {
         this.diveNum = diveNum;
         this.date = date;
         this.entryTime = entryTime;
@@ -108,7 +110,7 @@ public class Dive {
         this.surfaceTemp = surfaceTemp;
         this.buddy = buddy;
         this.boat = boat;
-        this.cylinder = cylinder;
+        this.cylinders = cylinders;
         this.weight = weight;
         this.notes = notes;
         this.sampleRate = sampleRate;
@@ -255,12 +257,12 @@ public class Dive {
         this.boat = boat;
     }
 
-    public Cylinder getCylinder() {
-        return cylinder;
+    public List<Cylinder> getAllCylinders() {
+        return cylinders;
     }
 
-    public void setCylinder(Cylinder cylinder) {
-        this.cylinder = cylinder;
+    public void addCylinderToCylinders(Cylinder cylinder) {
+        this.cylinders.add(cylinder);
     }
 
     public float getWeight() {

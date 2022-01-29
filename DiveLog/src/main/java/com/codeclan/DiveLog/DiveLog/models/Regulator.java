@@ -1,6 +1,7 @@
 package com.codeclan.DiveLog.DiveLog.models;
 
 import com.codeclan.DiveLog.DiveLog.interfaces.IValveType;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -12,6 +13,9 @@ public class Regulator implements IValveType {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @OneToOne(mappedBy = "regulator")
+    private Cylinder cylinder;
 
     @Column(name = "name")
     private String name;
@@ -25,8 +29,9 @@ public class Regulator implements IValveType {
     @Column(name = "notes")
     private String notes;
 
-    public Regulator(Long id, String name, ValveType valveType, Date dateOfLastService, String notes) {
+    public Regulator(Long id, Cylinder cylinder, String name, ValveType valveType, Date dateOfLastService, String notes) {
         this.id = id;
+        this.cylinder = cylinder;
         this.name = name;
         this.valveType = valveType;
         this.dateOfLastService = dateOfLastService;
@@ -43,6 +48,14 @@ public class Regulator implements IValveType {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Cylinder getCylinder() {
+        return cylinder;
+    }
+
+    public void setCylinder(Cylinder cylinder) {
+        this.cylinder = cylinder;
     }
 
     public String getName() {
