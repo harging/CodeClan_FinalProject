@@ -68,32 +68,11 @@ public class Dive {
     @Column(name = "boat")
     private String boat;
 
-    @Column(name = "tank")
-    private String tank;
-
-    @Column(name = "tank_volume")
-    private float tankVolume;
-
-    @Column(name = "working_pressure")
-    private float workingPressure;
-
-    @Column(name = "double_tank")
-    private float doubleTank;
-
-    @Column(name = "bar_start")
-    private int barStart;
-
-    @Column(name = "bar_end")
-    private int barEnd;
+    @Column(name = "cylinder")
+    private Cylinder cylinder;
 
     @Column(name = "weight")
     private float weight;
-
-    @Column(name = "o2")
-    private int o2;
-
-    @Column(name = "he")
-    private int he;
 
     @Column(name = "notes")
     private String notes;
@@ -106,7 +85,12 @@ public class Dive {
     @Column(name = "profile")
     private List<SamplePoint> profile = new ArrayList<>();
 
-    public Dive(int diveNum, Date date, Time entryTime, int surfaceInterval, int maxDepth, int averageDepth, String place, String diveSite, DecimalFormat latitude, DecimalFormat longitude, String weather, int visibility, int airTemp, int bottomTemp, int surfaceTemp, String buddy, String boat, String tank, float tankVolume, float workingPressure, float doubleTank, int barStart, int barEnd, float weight, int o2, int he, String notes, int sampleRate) {
+    public Dive(int diveNum, Date date, Time entryTime,
+                int surfaceInterval, int maxDepth, int averageDepth,
+                String place, String diveSite, DecimalFormat latitude,
+                DecimalFormat longitude, String weather, int visibility,
+                int airTemp, int bottomTemp, int surfaceTemp, String buddy,
+                String boat, Cylinder cylinder, float weight, String notes, int sampleRate) {
         this.diveNum = diveNum;
         this.date = date;
         this.entryTime = entryTime;
@@ -124,15 +108,8 @@ public class Dive {
         this.surfaceTemp = surfaceTemp;
         this.buddy = buddy;
         this.boat = boat;
-        this.tank = tank;
-        this.tankVolume = tankVolume;
-        this.workingPressure = workingPressure;
-        this.doubleTank = doubleTank;
-        this.barStart = barStart;
-        this.barEnd = barEnd;
+        this.cylinder = cylinder;
         this.weight = weight;
-        this.o2 = o2;
-        this.he = he;
         this.notes = notes;
         this.sampleRate = sampleRate;
         this.profile = new ArrayList<>();
@@ -278,52 +255,12 @@ public class Dive {
         this.boat = boat;
     }
 
-    public String getTank() {
-        return tank;
+    public Cylinder getCylinder() {
+        return cylinder;
     }
 
-    public void setTank(String tank) {
-        this.tank = tank;
-    }
-
-    public float getTankVolume() {
-        return tankVolume;
-    }
-
-    public void setTankVolume(float tankVolume) {
-        this.tankVolume = tankVolume;
-    }
-
-    public float getWorkingPressure() {
-        return workingPressure;
-    }
-
-    public void setWorkingPressure(float workingPressure) {
-        this.workingPressure = workingPressure;
-    }
-
-    public float getDoubleTank() {
-        return doubleTank;
-    }
-
-    public void setDoubleTank(float doubleTank) {
-        this.doubleTank = doubleTank;
-    }
-
-    public int getBarStart() {
-        return barStart;
-    }
-
-    public void setBarStart(int barStart) {
-        this.barStart = barStart;
-    }
-
-    public int getBarEnd() {
-        return barEnd;
-    }
-
-    public void setBarEnd(int barEnd) {
-        this.barEnd = barEnd;
+    public void setCylinder(Cylinder cylinder) {
+        this.cylinder = cylinder;
     }
 
     public float getWeight() {
@@ -332,22 +269,6 @@ public class Dive {
 
     public void setWeight(float weight) {
         this.weight = weight;
-    }
-
-    public int getO2() {
-        return o2;
-    }
-
-    public void setO2(int o2) {
-        this.o2 = o2;
-    }
-
-    public int getHe() {
-        return he;
-    }
-
-    public void setHe(int he) {
-        this.he = he;
     }
 
     public String getNotes() {
