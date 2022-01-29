@@ -102,6 +102,7 @@ public class Dive {
     private int sampleRate;
 
     @OneToMany(mappedBy = "dive")
+    @JsonBackReference
     @Column(name = "profile")
     private List<SamplePoint> profile = new ArrayList<>();
 

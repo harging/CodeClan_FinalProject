@@ -15,6 +15,7 @@ public class SamplePoint {
     private Long id;
 
     @ManyToOne
+    @JsonBackReference
     @JoinColumn(name = "dive_id", nullable = false)
     private Dive dive;
 
