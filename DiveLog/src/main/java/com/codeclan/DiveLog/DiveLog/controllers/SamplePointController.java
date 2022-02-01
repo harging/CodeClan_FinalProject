@@ -24,8 +24,8 @@ public class SamplePointController {
         return new ResponseEntity<>(samplePointRepository.findAll(), HttpStatus.OK);
     }
 
-    @GetMapping(value = "/samplepoints/{id}")
-    ResponseEntity<Optional<SamplePoint>> getSamplePointById(@PathVariable Long id){
-        return new ResponseEntity<>(samplePointRepository.findById(id), HttpStatus.OK);
-    }
+//    @GetMapping(value = "/samplepoints/{id}")
+//    ResponseEntity<Optional<SamplePoint>> getSamplePointById(@PathVariable Long id){
+//        return new ResponseEntity<>(samplePointRepository.findById(id), HttpStatus.OK);
+//    }
 }

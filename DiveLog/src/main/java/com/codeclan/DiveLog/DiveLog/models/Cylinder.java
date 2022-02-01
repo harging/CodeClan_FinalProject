@@ -2,6 +2,7 @@ package com.codeclan.DiveLog.DiveLog.models;
 
 import com.codeclan.DiveLog.DiveLog.interfaces.IValveType;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -14,9 +15,8 @@ public class Cylinder implements IValveType {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne()
-    @JoinColumn(name = "dive_id")
-    @JsonBackReference
+    @ManyToOne
+    @JoinColumn(name = "dive_id", nullable = false)
     private Dive dive;
 
     @OneToOne
@@ -56,10 +56,9 @@ public class Cylinder implements IValveType {
     @Column(name = "notes")
     private String notes;
 
-    public Cylinder(Long id, Dive dive, Regulator regulator, String name, Date dateOfLastTest, String testType,
+    public Cylinder(Dive dive, Regulator regulator, String name, Date dateOfLastTest, String testType,
                     ValveType valveType, int volume, int workingPressure, Boolean twinSet,
                     int barStart, int barEnd, int o2mix, String notes) {
-        this.id = id;
         this.dive = dive;
         this.regulator = regulator;
         this.name = name;

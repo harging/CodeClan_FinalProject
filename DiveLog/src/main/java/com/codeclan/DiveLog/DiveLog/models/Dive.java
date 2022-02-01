@@ -1,6 +1,8 @@
 package com.codeclan.DiveLog.DiveLog.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.sql.Time;
@@ -68,10 +70,10 @@ public class Dive {
     @Column(name = "boat")
     private String boat;
 
-    @Column(name = "cylinders")
-    @OneToMany(mappedBy = "dive")
+    @JsonIgnoreProperties({"dive"})
     @JsonBackReference
-    private List<Cylinder> cylinders = new ArrayList<>();
+    @OneToMany(mappedBy = "dive")
+    private List<Cylinder> cylinders;
 
     @Column(name = "weight")
     private float weight;
@@ -92,7 +94,7 @@ public class Dive {
                 String place, String diveSite, DecimalFormat latitude,
                 DecimalFormat longitude, String weather, int visibility,
                 int airTemp, int bottomTemp, int surfaceTemp, String buddy,
-                String boat, ArrayList<Cylinder> cylinders, float weight, String notes, int sampleRate) {
+                String boat, float weight, String notes, int sampleRate) {
         this.diveNum = diveNum;
         this.date = date;
         this.entryTime = entryTime;
@@ -110,7 +112,7 @@ public class Dive {
         this.surfaceTemp = surfaceTemp;
         this.buddy = buddy;
         this.boat = boat;
-        this.cylinders = cylinders;
+        this.cylinders = new ArrayList<>();
         this.weight = weight;
         this.notes = notes;
         this.sampleRate = sampleRate;
@@ -257,11 +259,16 @@ public class Dive {
         this.boat = boat;
     }
 
-    public List<Cylinder> getAllCylinders() {
+    public List<Cylinder> getCylinders() {
         return cylinders;
     }
 
-    public void addCylinderToCylinders(Cylinder cylinder) {
+
+    public void setCylinders(List<Cylinder> cylinders) {
+        this.cylinders = cylinders;
+    }
+
+    public void addCylinder(Cylinder cylinder) {
         this.cylinders.add(cylinder);
     }
 
