@@ -33,6 +33,7 @@ public class Cylinder implements IValveType {
     private String testType;
 
     @Column(name = "valve_type")
+    @Enumerated(value = EnumType.STRING)
     private ValveType valveType;
 
     @Column(name = "volume")

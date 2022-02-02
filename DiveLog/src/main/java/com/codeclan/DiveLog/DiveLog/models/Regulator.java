@@ -1,7 +1,6 @@
 package com.codeclan.DiveLog.DiveLog.models;
 
 import com.codeclan.DiveLog.DiveLog.interfaces.IValveType;
-import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -21,6 +20,7 @@ public class Regulator implements IValveType {
     private String name;
 
     @Column(name = "valve_type")
+    @Enumerated(value = EnumType.STRING)
     private ValveType valveType;
 
     @Column(name = "date_of_last_service")

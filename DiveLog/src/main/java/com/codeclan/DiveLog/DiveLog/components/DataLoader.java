@@ -1,23 +1,25 @@
 package com.codeclan.DiveLog.DiveLog.components;
 
-import com.codeclan.DiveLog.DiveLog.models.*;
+import com.codeclan.DiveLog.DiveLog.models.Cylinder;
+import com.codeclan.DiveLog.DiveLog.models.Dive;
+import com.codeclan.DiveLog.DiveLog.models.SamplePoint;
+import com.codeclan.DiveLog.DiveLog.models.ValveType;
 import com.codeclan.DiveLog.DiveLog.repositories.CylinderRepository;
 import com.codeclan.DiveLog.DiveLog.repositories.DiveRepository;
 import com.codeclan.DiveLog.DiveLog.repositories.RegulatorRepository;
 import com.codeclan.DiveLog.DiveLog.repositories.SamplePointRepository;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.*;
-import org.apache.poi.xssf.usermodel.XSSFSheet;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
-import javax.swing.text.html.HTMLDocument;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 @Component
@@ -39,90 +41,20 @@ public class DataLoader implements ApplicationRunner {
 
     }
 
+    private static double parseStringToDouble(String value) {
+        return value == null || value.trim().isEmpty() ? 0 : Double.parseDouble(value);
+    }
+
+    private static Boolean parseStringToBoolean(String value) {
+        return value == null || value.trim().isEmpty() ? false : Boolean.parseBoolean(value);
+    }
+
     public void run(ApplicationArguments args) {
-        Dive dive = new Dive(3, new Date(), null, 3,4,5,"Loch Fyne", "dinburgh", null, null, "", 3, 4, 6, 7, "buddy", "", 4.3f, "", 8);
-        diveRepository.save(dive);
-        SamplePoint sample1 = new SamplePoint(1, dive);
-        SamplePoint sample2 = new SamplePoint(2, dive);
-        SamplePoint sample3 = new SamplePoint(3, dive);
-        SamplePoint sample4 = new SamplePoint(3, dive);
-        SamplePoint sample5 = new SamplePoint(2, dive);
-        SamplePoint sample6 = new SamplePoint(1, dive);
-        samplePointRepository.save(sample1);
-        samplePointRepository.save(sample2);
-        samplePointRepository.save(sample3);
-        samplePointRepository.save(sample4);
-        samplePointRepository.save(sample5);
-        samplePointRepository.save(sample6);
-        samplePointRepository.save(sample1);
-        samplePointRepository.save(sample2);
-        samplePointRepository.save(sample3);
-        samplePointRepository.save(sample4);
-        samplePointRepository.save(sample5);
-        samplePointRepository.save(sample6);
-        Regulator regulator = new Regulator();
-        regulatorRepository.save(regulator);
-        Cylinder cylinder = new Cylinder(dive, regulator, "Cylinder 1", null, null, null, 6,55, true, 3,6,2,"");
-        cylinderRepository.save(cylinder);
 
         readFromExcel();
     }
 
     public void readFromExcel() {
-
-//        try {
-////            gets the file from the location
-//            File fileToRead = new File("/Users/user/FinalProject/divesTest.xlsx");
-//            FileInputStream file = new FileInputStream(fileToRead);
-////            turns it into a workbook
-//            Workbook workbook = new XSSFWorkbook(file);
-////            get the first sheet of the workbook
-//            Sheet sheet = workbook.getSheetAt(0);
-////            goes through each row
-//            Iterator<Row> rowIterator = sheet.iterator();
-//            int columnIndex;
-//            String diveDate = null;
-//            int numCellValue;
-//            int numColumnIndex;
-//            int diveNum = 0;
-//
-//            while(rowIterator.hasNext()){
-//                Row row = rowIterator.next();
-////                iterate through the columns for every row
-//                Iterator<Cell> cellIterator = row.cellIterator();
-//                while(cellIterator.hasNext()) {
-//                    Cell cell = cellIterator.next();
-////                    checks the cell type
-//                    switch (cell.getCellType()) {
-//                        case STRING:
-//                            String cellValue = cell.getStringCellValue();
-//                            columnIndex = cell.getColumnIndex();
-//                            if(columnIndex == 1 && cellValue != "date"){
-//                                diveDate = cellValue;
-//                            }
-//
-//                            break;
-//                        case NUMERIC:
-//                            numCellValue = (int) cell.getNumericCellValue();
-//                            numColumnIndex = cell.getColumnIndex();
-//                            if(numColumnIndex == 0){
-//                                diveNum = numCellValue;
-//                            }
-//                            break;
-//                    }
-//                }
-//                Dive dive = new Dive(diveNum, new Date(), null, 3,4,5, diveDate, "dinburgh", null, null, "", 3, 4, 6, 7, "buddy", "", 4.3f, "", 8);
-//                diveRepository.save(dive);
-//            }
-//            System.out.println("END");
-//            file.close();
-//        }
-//        catch(FileNotFoundException fne) {
-//            fne.printStackTrace();
-//        }
-//        catch (Exception e) {
-//            e.printStackTrace();
-//        }
 
         try {
             FileInputStream file = new FileInputStream(new File("/Users/user/FinalProject/Gavin_dives.xls"));
@@ -148,8 +80,7 @@ public class DataLoader implements ApplicationRunner {
                 }
                 i++;
             }
-            System.out.println(data);
-            createAndSaveObjects(data);
+            createAndSaveDive(data);
         }
         catch(FileNotFoundException fne) {
             fne.printStackTrace();
@@ -160,7 +91,70 @@ public class DataLoader implements ApplicationRunner {
 
     }
 
-    private void createAndSaveObjects(Map data) {
-        createAndSaveDive(diveData);
+    public void createAndSaveDive(Map<Integer, List<String>> data) throws ParseException {
+//        for each key-value pair
+//        get the values(arraylist)
+//        construct object using index values
+        String pattern = "yyyy-MM-dd HH:mm:ss";
+        SimpleDateFormat simpleDateFormatDate = new SimpleDateFormat(pattern);
+
+        int index = 0;
+        for (List value : data.values()) {
+            index++;
+            if(index == 1){
+                continue;
+            }
+
+            int diveNum = (int) Double.parseDouble(value.get(0).toString());
+            Date startDate = simpleDateFormatDate.parse(value.get(1)+" "+value.get(2));
+            int surfaceInterval = (int) Double.parseDouble(value.get(4).toString());
+
+            Calendar endTime = Calendar.getInstance();
+            endTime.setTime(startDate);
+            endTime.add(Calendar.SECOND, surfaceInterval);
+//            to split up the profile list use string.split(",")
+//            this will return an array of strings which i can then cast to doubles.
+            System.out.println(startDate.getTime()+" "+endTime.getTime());
+            System.out.println(simpleDateFormatDate.format(endTime.getTime()));
+            String[] profileArray = value.get(29).toString().split(",");
+
+//            Dive object data
+            int maxDepth = (int) parseStringToDouble(value.get(5).toString());
+            int averageDepth = (int) parseStringToDouble(value.get(6).toString());
+            String place = value.get(7).toString();
+            String diveSite = value.get(8).toString();
+            Double latitude = parseStringToDouble(value.get(9).toString());
+            Double longitude = parseStringToDouble(value.get(10).toString());
+            String weather = value.get(11).toString();
+            int airTemp = (int) parseStringToDouble(value.get(13).toString());
+            int bottomTemp = (int) parseStringToDouble(value.get(14).toString());
+            int surfaceTemp = (int) parseStringToDouble(value.get(15).toString());
+            String buddy = value.get(16).toString();
+            String boat = value.get(17).toString();
+            double weight = parseStringToDouble(value.get(15).toString());
+            String notes = value.get(27).toString();
+            int sampleRate = (int) parseStringToDouble(value.get(28).toString());
+//            Cylinder object data
+            int cylinderVolume = (int) parseStringToDouble(value.get(19).toString());
+            int workingPressure = (int) parseStringToDouble(value.get(20).toString());
+            Boolean twinSet = (Boolean) parseStringToBoolean(value.get(21).toString());
+            int barStart = (int) parseStringToDouble(value.get(22).toString());
+            int barEnd = (int) parseStringToDouble(value.get(23).toString());
+            int o2Mix = (int) parseStringToDouble(value.get(24).toString());
+
+//            Creates a dive every iteration and saves it
+            Dive dive = new Dive(diveNum, startDate, endTime, surfaceInterval, maxDepth, averageDepth, place, diveSite, latitude, longitude, weather, airTemp, bottomTemp, surfaceTemp, buddy, boat, weight, notes, sampleRate);
+            diveRepository.save(dive);
+
+//            Splits the list of sample points by , and creates new SamplePoint objects with the values
+            for (String sample: profileArray){
+                SamplePoint samplePoint = new SamplePoint(parseStringToDouble(sample), dive);
+                samplePointRepository.save(samplePoint);
+            }
+//            Creates a new cylinder object related to every dive per iteration
+            Cylinder cylinder = new Cylinder(dive, null, null, null, null, ValveType.DIN, cylinderVolume, workingPressure, twinSet, barStart, barEnd, o2Mix, null);
+            cylinderRepository.save(cylinder);
+        }
+
     }
 }

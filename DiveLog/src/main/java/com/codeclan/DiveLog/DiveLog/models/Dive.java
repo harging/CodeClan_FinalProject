@@ -2,12 +2,10 @@ package com.codeclan.DiveLog.DiveLog.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
-import java.sql.Time;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -25,8 +23,8 @@ public class Dive {
     @Column(name = "date")
     private Date date;
 
-    @Column(name = "entry_time")
-    private Time entryTime;
+    @Column(name = "end_time")
+    private Calendar endTime;
 
     @Column(name = "surface_interval")
     private int surfaceInterval;
@@ -44,16 +42,13 @@ public class Dive {
     private String diveSite;
 
     @Column(name = "latitude")
-    private DecimalFormat latitude;
+    private Double latitude;
 
     @Column(name = "longitude")
-    private DecimalFormat longitude;
+    private Double longitude;
 
     @Column(name = "weather")
     private String weather;
-
-    @Column(name = "visibility")
-    private int visibility;
 
     @Column(name = "air_temp")
     private int airTemp;
@@ -73,12 +68,12 @@ public class Dive {
     @JsonIgnoreProperties({"dive"})
     @JsonBackReference
     @OneToMany(mappedBy = "dive")
-    private List<Cylinder> cylinders;
+    private List<Cylinder> cylinders = new ArrayList<>();
 
     @Column(name = "weight")
-    private float weight;
+    private double weight;
 
-    @Column(name = "notes")
+    @Column(name = "notes", length = 5000)
     private String notes;
 
     @Column(name = "sample_rate")
@@ -89,15 +84,15 @@ public class Dive {
     @Column(name = "profile")
     private List<SamplePoint> profile = new ArrayList<>();
 
-    public Dive(int diveNum, Date date, Time entryTime,
+    public Dive(int diveNum, Date date, Calendar endTime,
                 int surfaceInterval, int maxDepth, int averageDepth,
-                String place, String diveSite, DecimalFormat latitude,
-                DecimalFormat longitude, String weather, int visibility,
+                String place, String diveSite, Double latitude,
+                Double longitude, String weather,
                 int airTemp, int bottomTemp, int surfaceTemp, String buddy,
-                String boat, float weight, String notes, int sampleRate) {
+                String boat, double weight, String notes, int sampleRate) {
         this.diveNum = diveNum;
         this.date = date;
-        this.entryTime = entryTime;
+        this.endTime = endTime;
         this.surfaceInterval = surfaceInterval;
         this.maxDepth = maxDepth;
         this.averageDepth = averageDepth;
@@ -106,7 +101,6 @@ public class Dive {
         this.latitude = latitude;
         this.longitude = longitude;
         this.weather = weather;
-        this.visibility = visibility;
         this.airTemp = airTemp;
         this.bottomTemp = bottomTemp;
         this.surfaceTemp = surfaceTemp;
@@ -139,12 +133,12 @@ public class Dive {
         this.date = date;
     }
 
-    public Time getEntryTime() {
-        return entryTime;
+    public Calendar getEndTime() {
+        return endTime;
     }
 
-    public void setEntryTime(Time entryTime) {
-        this.entryTime = entryTime;
+    public void setEndTime(Calendar endTime) {
+        this.endTime = endTime;
     }
 
     public int getSurfaceInterval() {
@@ -187,19 +181,19 @@ public class Dive {
         this.diveSite = diveSite;
     }
 
-    public DecimalFormat getLatitude() {
+    public Double getLatitude() {
         return latitude;
     }
 
-    public void setLatitude(DecimalFormat latitude) {
+    public void setLatitude(Double latitude) {
         this.latitude = latitude;
     }
 
-    public DecimalFormat getLongitude() {
+    public Double getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(DecimalFormat longitude) {
+    public void setLongitude(Double longitude) {
         this.longitude = longitude;
     }
 
@@ -209,14 +203,6 @@ public class Dive {
 
     public void setWeather(String weather) {
         this.weather = weather;
-    }
-
-    public int getVisibility() {
-        return visibility;
-    }
-
-    public void setVisibility(int visibility) {
-        this.visibility = visibility;
     }
 
     public int getAirTemp() {
@@ -272,11 +258,11 @@ public class Dive {
         this.cylinders.add(cylinder);
     }
 
-    public float getWeight() {
+    public double getWeight() {
         return weight;
     }
 
-    public void setWeight(float weight) {
+    public void setWeight(double weight) {
         this.weight = weight;
     }
 
