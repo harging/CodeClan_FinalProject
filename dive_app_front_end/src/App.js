@@ -1,24 +1,11 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import LogContainer from './containers/LogContainer';
 
 function App() {
+  const baseUrl = "http://localhost:8080"
+  
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <LogContainer baseUrl={baseUrl} />
   );
 }
 
