@@ -8,12 +8,14 @@ import com.codeclan.DiveLog.DiveLog.Utility;
 import com.codeclan.DiveLog.DiveLog.repositories.SamplePointRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.rmi.ServerException;
 import java.util.List;
 import java.util.Optional;
 
@@ -55,4 +57,10 @@ public class DiveController {
 
         return "Success";
     }
-}
+
+    @PostMapping(value = "/dives", consumes={"application/json"})
+    public ResponseEntity<Dive> createDive(@RequestBody Dive newDive) {
+        Dive dive = diveRepository.save(newDive);
+            return new ResponseEntity<>(dive, HttpStatus.CREATED);
+    }
+    }
