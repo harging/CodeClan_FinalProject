@@ -66,7 +66,8 @@ public class Dive {
     private String boat;
 
     @JsonIgnoreProperties({"dive"})
-    @JsonBackReference
+
+    //@JsonBackReference
     @OneToMany(mappedBy = "dive")
     private List<Cylinder> cylinders = new ArrayList<>();
 
