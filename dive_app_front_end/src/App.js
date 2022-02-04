@@ -1,11 +1,14 @@
 import React from 'react';
-import LogContainer from './containers/LogContainer';
+import TitleBar from './components/TitleBar';
+import DiveContainer from './containers/DiveContainer';
 
 function App() {
-  const baseUrl = "http://localhost:8080"
   
   return (
-    <LogContainer baseUrl={baseUrl} />
+    <>
+    <TitleBar />
+    <DiveContainer />
+    </>
   );
 }
 

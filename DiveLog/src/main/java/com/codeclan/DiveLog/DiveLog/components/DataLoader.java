@@ -1,5 +1,6 @@
 package com.codeclan.DiveLog.DiveLog.components;
 
+import com.codeclan.DiveLog.DiveLog.Utility;
 import com.codeclan.DiveLog.DiveLog.models.Cylinder;
 import com.codeclan.DiveLog.DiveLog.models.Dive;
 import com.codeclan.DiveLog.DiveLog.models.SamplePoint;
@@ -50,11 +51,11 @@ public class DataLoader implements ApplicationRunner {
     }
 
     public void run(ApplicationArguments args) {
-
-        readFromExcel();
+        //TODO: Put this line back if you want to load from a local file
+        readFromLocalExcelFile();
     }
 
-    public void readFromExcel() {
+    public void readFromLocalExcelFile() {
 
         try {
             FileInputStream file = new FileInputStream(new File("/Users/user/FinalProject/Gavin_dives.xls"));
@@ -80,7 +81,8 @@ public class DataLoader implements ApplicationRunner {
                 }
                 i++;
             }
-            createAndSaveDive(data);
+            Utility utiilities = new Utility(diveRepository,samplePointRepository,cylinderRepository);
+            utiilities.createAndSaveDive(data);
         }
         catch(FileNotFoundException fne) {
             fne.printStackTrace();
@@ -91,7 +93,7 @@ public class DataLoader implements ApplicationRunner {
 
     }
 
-    public void createAndSaveDive(Map<Integer, List<String>> data) throws ParseException {
+    /*public void createAndSaveDive(Map<Integer, List<String>> data) throws ParseException {
 //        for each key-value pair
 //        get the values(arraylist)
 //        construct object using index values
@@ -108,10 +110,11 @@ public class DataLoader implements ApplicationRunner {
             int diveNum = (int) Double.parseDouble(value.get(0).toString());
             Date startDate = simpleDateFormatDate.parse(value.get(1)+" "+value.get(2));
             int surfaceInterval = (int) Double.parseDouble(value.get(4).toString());
+            int duration = (int) Double.parseDouble(value.get(3).toString());
 
             Calendar endTime = Calendar.getInstance();
             endTime.setTime(startDate);
-            endTime.add(Calendar.SECOND, surfaceInterval);
+            endTime.add(Calendar.SECOND, duration);
 //            to split up the profile list use string.split(",")
 //            this will return an array of strings which i can then cast to doubles.
             System.out.println(startDate.getTime()+" "+endTime.getTime());
@@ -156,5 +159,5 @@ public class DataLoader implements ApplicationRunner {
             cylinderRepository.save(cylinder);
         }
 
-    }
+    }*/
 }

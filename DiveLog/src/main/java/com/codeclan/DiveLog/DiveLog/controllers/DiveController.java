@@ -2,14 +2,18 @@ package com.codeclan.DiveLog.DiveLog.controllers;
 
 import com.codeclan.DiveLog.DiveLog.models.Dive;
 import com.codeclan.DiveLog.DiveLog.models.SamplePoint;
+import com.codeclan.DiveLog.DiveLog.repositories.CylinderRepository;
 import com.codeclan.DiveLog.DiveLog.repositories.DiveRepository;
+import com.codeclan.DiveLog.DiveLog.Utility;
+import com.codeclan.DiveLog.DiveLog.repositories.SamplePointRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,6 +22,12 @@ public class DiveController {
 
     @Autowired
     DiveRepository diveRepository;
+
+    @Autowired
+    SamplePointRepository samplePointRepository;
+
+    @Autowired
+    CylinderRepository cylinderRepository;
 
     @GetMapping(value = "/dives")
     ResponseEntity<List<Dive>> getAllDives(){
@@ -33,5 +43,16 @@ public class DiveController {
     @GetMapping(value = "/dives/{id}/profile")
     ResponseEntity <List<SamplePoint>> getProfileByDiveId(@PathVariable Long id){
         return new ResponseEntity<>(diveRepository.findById(id).get().getProfile(), HttpStatus.OK);
+    }
+
+    @PostMapping(value = "/uploaddives")
+    public String loadDiveExcel(
+            @RequestParam("excelfile") MultipartFile exelfile, Model model)
+            throws IOException {
+        //call your db class loader
+        Utility utilities = new Utility(diveRepository, samplePointRepository, cylinderRepository);
+        utilities.readFromExcelStream(exelfile.getBytes());
+
+        return "Success";
     }
 }
