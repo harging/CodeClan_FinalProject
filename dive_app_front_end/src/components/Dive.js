@@ -12,7 +12,7 @@ const Dive = ({ dive }) => {
           <h3>{date} - {end}</h3>
           <p>{dive.place}, {dive.diveSite}</p>
           <p>{dive.notes}</p>
-          <p>Buddy: {dive.buddy}, Air temp: {dive.airTemp}C, Surface temp: {dive.surfaceTemp}C, Bottom temp: {dive.bottomTemp}C, Boat: {dive.boat}, Weight: {dive.weight}Kgs</p> 
+          <p>Buddy: {dive.buddy}, Air: {dive.airTemp}C, Surface: {dive.surfaceTemp}C, Bottom: {dive.bottomTemp}C, Boat: {dive.boat}, Weight: {dive.weight}Kgs</p> 
       </div>
   )
 }
