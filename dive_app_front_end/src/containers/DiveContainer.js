@@ -45,7 +45,7 @@ const DiveContainer = () => {
 
         <>
             <Dive dive={selectedDive}/>
-            <ProfileGraph dive={selectedDive}/>
+            {/* <ProfileGraph dive={selectedDive}/> */}
             <DiveSelect dives={dives} dive={selectedDive} onDiveSelected={handleDiveSelected} />
         </>
     )
