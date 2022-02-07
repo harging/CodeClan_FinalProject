@@ -43,10 +43,9 @@ const DiveContainer = () => {
 
     return (
 
-        // How do I get the selected dive to appear where it is in the list? Not at the top or bottom?
         <>
             <Dive dive={selectedDive}/>
-            {/* <ProfileGraph dive={selectedDive}/> */}
+            <ProfileGraph dive={selectedDive}/>
             <DiveSelect dives={dives} dive={selectedDive} onDiveSelected={handleDiveSelected} />
         </>
     )
