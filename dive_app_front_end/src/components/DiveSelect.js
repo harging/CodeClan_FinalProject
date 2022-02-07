@@ -1,3 +1,5 @@
+import React from 'react';
+
 const DiveSelect = ({ dives, onDiveSelected }) => {
 
     // Why can't I make the whole li a button by wrapping it in the button tag?
