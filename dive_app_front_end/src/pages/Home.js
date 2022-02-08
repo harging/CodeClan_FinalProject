@@ -5,6 +5,7 @@ import DiveContainer from "../containers/DiveContainer";
 const Home = () => {
     return (
     <DiveContainer />
-    )};
+    )
+  };
   
   export default Home;

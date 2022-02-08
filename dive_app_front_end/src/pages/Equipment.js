@@ -1,8 +1,11 @@
 import React from "react";
+import EquipmentContainer from "../containers/EquipmentContainer";
 
 const Equipment = () => {
     return(
-        <div>Equipment goes here</div>
+        <>
+        <EquipmentContainer />
+        </>
     )
 };
 

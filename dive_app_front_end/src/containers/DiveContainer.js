@@ -10,15 +10,10 @@ const baseUrl = "http://localhost:8080"
 const DiveContainer = () => {
 
     const [dives, setDives] = useState([])
-    const [cylinders, setCylinders] = useState([])
     const [selectedDiveId, setSelectedDiveId] = useState('')
 
     useEffect(() => {
         getDives(`${baseUrl}/dives`)
-    }, [])
-
-    useEffect(() => {
-        getCylinders(`${baseUrl}/cylinders`)
     }, [])
     
     const getDives = url => {
@@ -27,13 +22,6 @@ const DiveContainer = () => {
                 .then(divesList => setDives(divesList))
                 .catch(err => console.error(err));
             }
-
-    const getCylinders = url => {
-        fetch(url)
-            .then(res => res.json())
-            .then(cylindersList => setCylinders(cylindersList))
-            .catch(err => console.error(err));
-        }
 
     const handleDiveSelected = id => {
         setSelectedDiveId(id)
