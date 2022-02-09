@@ -141,7 +141,7 @@ public class Utility {
                 samplePointRepository.save(samplePoint);
             }
 //            Creates a new cylinder object related to every dive per iteration
-            Cylinder cylinder = new Cylinder(dive, null, null, null, null, ValveType.DIN, cylinderVolume, workingPressure, twinSet, barStart, barEnd, o2Mix, null);
+            Cylinder cylinder = new Cylinder(dive, null, "Not recorded", null, null, ValveType.DIN, cylinderVolume, workingPressure, twinSet, barStart, barEnd, o2Mix, null);
             cylinderRepository.save(cylinder);
         }
 

@@ -52,7 +52,8 @@ public class DataLoader implements ApplicationRunner {
 
     public void run(ApplicationArguments args) {
         //TODO: Put this line back if you want to load from a local file
-        readFromLocalExcelFile();
+//        readFromLocalExcelFile();
+        System.out.println("correct version");
     }
 
     public void readFromLocalExcelFile() {

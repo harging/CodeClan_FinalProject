@@ -34,7 +34,8 @@ public class DiveController {
     @GetMapping(value = "/dives")
     ResponseEntity<List<Dive>> getAllDives(){
         System.out.println(diveRepository.findAll().get(0).getCylinders());
-        return new ResponseEntity<>(diveRepository.findAll(), HttpStatus.OK);
+        return new ResponseEntity<>(diveRepository.findByOrderByIdDesc(), HttpStatus.OK);
+        //return new ResponseEntity<>(diveRepository.findAll(), HttpStatus.OK);
     }
 
     @GetMapping(value = "/dives/{id}")
@@ -48,14 +49,13 @@ public class DiveController {
     }
 
     @PostMapping(value = "/uploaddives")
-    public String loadDiveExcel(
-            @RequestParam("excelfile") MultipartFile exelfile, Model model)
+    public String loadDiveExcel( @RequestParam("excelfile") MultipartFile excelfile, Model model )
             throws IOException {
-        //call your db class loader
-        Utility utilities = new Utility(diveRepository, samplePointRepository, cylinderRepository);
-        utilities.readFromExcelStream(exelfile.getBytes());
+                //call your db class loader
+                Utility utilities = new Utility(diveRepository, samplePointRepository, cylinderRepository);
+                utilities.readFromExcelStream(excelfile.getBytes());
 
-        return "Success";
+                return "Success";
     }
 
     @PostMapping(value = "/dives", consumes={"application/json"})

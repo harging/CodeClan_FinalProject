@@ -16,7 +16,7 @@ public class Cylinder implements IValveType {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "dive_id", nullable = false)
+    @JoinColumn(name = "dive_id")
     @JsonBackReference
     private Dive dive;
 
