@@ -29,7 +29,7 @@ const DiveContainer = () => {
         getSamplePoints(id)
         window.scrollTo(
             {
-                top: 350,
+                top: 400,
                 left: 100,
                 behavior: 'smooth'
             }
