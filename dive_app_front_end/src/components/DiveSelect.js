@@ -2,7 +2,6 @@ import React from 'react';
 
 const DiveSelect = ({ dives, onDiveSelected }) => {
 
-    // Why can't I add the date consts from the Dive component?
 
     return (
         <ul>

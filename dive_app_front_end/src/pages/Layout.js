@@ -5,9 +5,10 @@ const Layout = () => {
     return (
         <>
             <nav className="nav">
+            {/* <h1 className="logo">.diveLogger</h1> */}
                 <ul>
-                    <li>
-                        <Link to="/">Home</Link>
+                    <li className="logo">
+                        <Link to="/">.diveLogger</Link>
                     </li>
                     <li>
                         <Link to="/createdive">Add Dive</Link>
@@ -17,11 +18,6 @@ const Layout = () => {
                     </li>
                 </ul>
             </nav>
-
-            <div className="logo">
-                <h1>.diveLogger</h1>
-            </div>
-
             <Outlet />
         </>
     )

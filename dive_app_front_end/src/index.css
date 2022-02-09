@@ -5,9 +5,89 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #333;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+.nav{
+  background-color: #333;
+  color: #4B8F8C;
+  list-style-type: none;
+  font-size: 22px;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.nav > ul{
+  background-color: #333;
+  color: #4B8F8C;
+  list-style-type: none;
+  padding: 5%;
+  font-weight: bold;
+}
+
+a, a:visited, a:hover, a:active {
+  color: inherit;
+  text-decoration: none;
+}
+
+.logo{
+  background-color: #333;
+  color: #4B8F8C;
+  padding: 5%;
+  font-weight: bold;
+  font-size: 40pt;
+}
+
+.expandedDive{
+  background-color: #333;
+  color: #f5f5f5;
+  padding: 5%;
+}
+
+.diveListItem{
+  background-color: #333;
+  color: #f5f5f5;
+  list-style-type: none;
+  padding: 2px;
+}
+
+.diveListItem > button{
+    background-color: #333;
+    color: #f5f5f5;
+    padding: 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border: 0;
+  background: #4B8F8C;
+  border-radius: 0px;
+}
+
+.diveListItem button:hover{
+  font-size: large;
+}
+
+.home-page{
+  background-color: #333;
+}
+
+.root{
+  background-color: #333;
+}
+
+.file-upload-form{
+  background-color: #333;
+  border: 1px;
+  color: #f5f5f5;
+  padding: 15px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
 }
