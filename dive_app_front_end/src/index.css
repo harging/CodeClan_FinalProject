@@ -91,3 +91,11 @@ a, a:visited, a:hover, a:active {
   display: inline-block;
   font-size: 16px;
 }
+
+.loading{
+  background-color: #333;
+  color: #4B8F8C;
+  padding: 5%;
+  font-weight: bold;
+  font-size: 20pt;
+}
