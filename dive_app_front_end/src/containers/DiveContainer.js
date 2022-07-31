@@ -50,7 +50,7 @@ const DiveContainer = () => {
         {dives ? <div className="home-page">
             <Dive dive={selectedDive} samplePoints={samplePoints}/>
             <DiveSelect dives={dives} dive={selectedDive} onDiveSelected={handleDiveSelected} />
-        </div> : <div> 'Please wait around 15 seconds for the dives to load' </div>}
+        </div> : <div className="logo"> Please wait around 15 seconds for the dives to load </div>}
     </>)
 }
 
