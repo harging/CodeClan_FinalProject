@@ -14,14 +14,16 @@ const DiveContainer = () => {
     const [samplePoints, setSamplePoints] = useState([])
 
     useEffect(() => {
-        getDives(`${baseUrl}/dives`)
+        getDives()
     }, [])
     
-    const getDives = url => {
-        fetch(url)
-            .then(res => res.json())
-            .then(divesList => setDives(divesList))
-            .catch(err => console.error(err));
+     async function getDives() {
+        const response = await fetch(`${baseUrl}/dives`)
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const dives = await response.json()
+        setDives(dives)
     }
 
     const handleDiveSelected = id => {
@@ -46,11 +48,13 @@ const DiveContainer = () => {
     const selectedDive = dives.find(dive => dive.id === selectedDiveId)
 
     return (
-<>
-        {!dives ? <div className="home-page">
+    <>
+        {dives.length != 0 ?
+        <div className="home-page">
             <Dive dive={selectedDive} samplePoints={samplePoints}/>
             <DiveSelect dives={dives} dive={selectedDive} onDiveSelected={handleDiveSelected} />
-        </div> : <div className="loading"> Please wait around 15 seconds for the dives to load... </div>}
+        </div>
+        : <div className="loading"> Please wait around 15 seconds for the dives to load... </div>}
     </>)
 }
 
