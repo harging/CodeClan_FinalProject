@@ -1,13 +1,12 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Home from "./pages/Home";
-import NoPage from "./pages/NoPage";
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Home from './pages/Home';
+import NoPage from './pages/NoPage';
 import Layout from './pages/Layout';
-import CreateDive from './pages/CreateDive'
-import Equipment from './pages/Equipment'
+import CreateDive from './pages/CreateDive';
+import Equipment from './pages/Equipment';
 
 function App() {
-  
   return (
     <BrowserRouter>
       <Routes>

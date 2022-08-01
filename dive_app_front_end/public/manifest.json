@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "diveLogger",
+  "name": "diveLogger",
   "icons": [
     {
       "src": "favicon.ico",
