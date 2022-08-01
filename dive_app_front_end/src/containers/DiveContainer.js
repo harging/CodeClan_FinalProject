@@ -2,8 +2,6 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import DiveSelect from '../components/DiveSelect';
 import Dive from '../components/Dive';
-import ProfileGraph from '../components/ProfileGraph';
-import { isClass } from 'highcharts';
 
 const baseUrl = 'https://dive-logger-back-end.herokuapp.com';
 
@@ -46,7 +44,7 @@ const DiveContainer = () => {
 
   return (
     <>
-      {dives.length != 0 ? (
+      {dives.length ? (
         <div className="home-page">
           <Dive dive={selectedDive} samplePoints={samplePoints} />
           <DiveSelect

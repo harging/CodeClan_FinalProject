@@ -7,8 +7,6 @@ const ProfileGraph = ({ samplePoints, dive }) => {
     return null;
   }
 
-  const sampleRate = dive.sampleRate;
-  const duration = samplePoints.length * sampleRate;
   const depths = samplePoints.map((samplePoint) => samplePoint.depth);
 
   const options = {
