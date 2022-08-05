@@ -1,13 +1,13 @@
-import React from 'react';
-import Highcharts from 'highcharts';
-import HighchartsReact from 'highcharts-react-official';
+import React from 'react'
+import Highcharts from 'highcharts'
+import HighchartsReact from 'highcharts-react-official'
 
 const ProfileGraph = ({ samplePoints, dive }) => {
   if (!samplePoints.length || !dive) {
-    return null;
+    return null
   }
 
-  const depths = samplePoints.map((samplePoint) => samplePoint.depth);
+  const depths = samplePoints.map((samplePoint) => samplePoint.depth)
 
   const options = {
     chart: {
@@ -68,13 +68,13 @@ const ProfileGraph = ({ samplePoints, dive }) => {
         }
       ]
     }
-  };
+  }
 
   return (
     <>
       <HighchartsReact highcharts={Highcharts} options={options} />
     </>
-  );
-};
+  )
+}
 
-export default ProfileGraph;
+export default ProfileGraph

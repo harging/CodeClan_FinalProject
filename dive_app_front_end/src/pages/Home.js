@@ -1,9 +1,9 @@
-import React from 'react';
+import React from 'react'
 
-import DiveContainer from '../containers/DiveContainer';
+import DiveContainer from '../containers/DiveContainer'
 
 const Home = () => {
-  return <DiveContainer />;
-};
+  return <DiveContainer />
+}
 
-export default Home;
+export default Home

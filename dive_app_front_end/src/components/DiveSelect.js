@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 
 const DiveSelect = ({ dives, onDiveSelected }) => {
   return (
@@ -10,10 +10,10 @@ const DiveSelect = ({ dives, onDiveSelected }) => {
               {dive.diveNum} - {dive.place}, {dive.diveSite}
             </button>
           </li>
-        );
+        )
       })}
     </ul>
-  );
-};
+  )
+}
 
-export default DiveSelect;
+export default DiveSelect

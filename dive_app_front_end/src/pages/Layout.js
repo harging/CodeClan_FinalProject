@@ -1,5 +1,5 @@
-import { Outlet, Link } from 'react-router-dom';
-import React from 'react';
+import { Outlet, Link } from 'react-router-dom'
+import React from 'react'
 
 const Layout = () => {
   return (
@@ -20,7 +20,7 @@ const Layout = () => {
       </nav>
       <Outlet />
     </>
-  );
-};
+  )
+}
 
-export default Layout;
+export default Layout

@@ -1,9 +1,9 @@
-import React from 'react';
-import ProfileGraph from './ProfileGraph';
+import React from 'react'
+import ProfileGraph from './ProfileGraph'
 
 const Dive = ({ dive, samplePoints }) => {
   if (!dive || !samplePoints.length) {
-    return null;
+    return null
   }
 
   const date = new Date(dive.date).toLocaleString('en-GB', {
@@ -13,11 +13,11 @@ const Dive = ({ dive, samplePoints }) => {
     year: 'numeric',
     hour: '2-digit',
     minute: '2-digit'
-  });
+  })
   const end = new Date(dive.endTime).toLocaleTimeString('en-GB', {
     hour: '2-digit',
     minute: '2-digit'
-  });
+  })
 
   return (
     <div className="expandedDive">
@@ -35,7 +35,7 @@ const Dive = ({ dive, samplePoints }) => {
         Bottom: {dive.bottomTemp}C, Boat: {dive.boat}, Weight: {dive.weight}Kgs
       </p>
     </div>
-  );
-};
+  )
+}
 
-export default Dive;
+export default Dive

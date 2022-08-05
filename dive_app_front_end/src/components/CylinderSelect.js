@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 
 const CylinderSelect = ({ cylinders, onCylinderSelected }) => {
   return (
@@ -11,10 +11,10 @@ const CylinderSelect = ({ cylinders, onCylinderSelected }) => {
               {cylinder.name}{' '}
             </button>
           </li>
-        );
+        )
       })}
     </ul>
-  );
-};
+  )
+}
 
-export default CylinderSelect;
+export default CylinderSelect

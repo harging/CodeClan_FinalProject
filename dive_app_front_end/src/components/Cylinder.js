@@ -1,8 +1,8 @@
-import React from 'react';
+import React from 'react'
 
 const Cylinder = ({ cylinder }) => {
   if (!cylinder) {
-    return null;
+    return null
   }
 
   return (
@@ -10,7 +10,7 @@ const Cylinder = ({ cylinder }) => {
       <h3>Name {cylinder.name}</h3>
       <p>{cylinder.notes}</p>
     </div>
-  );
-};
+  )
+}
 
-export default Cylinder;
+export default Cylinder

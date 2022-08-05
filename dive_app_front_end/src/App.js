@@ -1,10 +1,10 @@
-import React from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Home from './pages/Home';
-import NoPage from './pages/NoPage';
-import Layout from './pages/Layout';
-import CreateDive from './pages/CreateDive';
-import Equipment from './pages/Equipment';
+import React from 'react'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import Home from './pages/Home'
+import NoPage from './pages/NoPage'
+import Layout from './pages/Layout'
+import CreateDive from './pages/CreateDive'
+import Equipment from './pages/Equipment'
 
 function App() {
   return (
@@ -18,7 +18,7 @@ function App() {
         </Route>
       </Routes>
     </BrowserRouter>
-  );
+  )
 }
 
-export default App;
+export default App

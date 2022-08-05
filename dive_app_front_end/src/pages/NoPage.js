@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 
 const NoPage = () => {
   return (
@@ -6,7 +6,7 @@ const NoPage = () => {
       <h1>404</h1>
       <p>Whoops! Try going back to the home page.</p>
     </>
-  );
-};
+  )
+}
 
-export default NoPage;
+export default NoPage

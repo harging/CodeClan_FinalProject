@@ -1,12 +1,12 @@
-import React from 'react';
+import React from 'react'
 
 const Loading = ({ diveFile }) => {
   if (!diveFile) {
-    return <div></div>;
+    return <div></div>
   } else {
-    console.log(diveFile);
-    return <div>Loading...</div>;
+    console.log(diveFile)
+    return <div>Loading...</div>
   }
-};
+}
 
-export default Loading;
+export default Loading
