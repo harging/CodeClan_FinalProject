@@ -29,7 +29,7 @@ const DiveContainer = () => {
     window.scrollTo({
       top: 400,
       left: 100,
-      behavior: 'smooth'
+      behavior: 'smooth',
     })
   }
 
